@@ -1,24 +1,11 @@
 import pytest
+from datar.core.utils import arg_match
 
-from pandas import DataFrame
-from datar.utils import *
 
-def test_head_tail():
-    df = DataFrame(range(20), columns=['x'])
-    z = df >> head()
-    assert z.shape[0] == 6
-    z = df >> head(3)
-    assert z.shape[0] == 3
-    z = list(range(10)) >> head()
-    assert len(z) == 6
-    with pytest.raises(NotImplementedError):
-        head(3)
+def test_arg_match():
+    with pytest.raises(ValueError, match='abc'):
+        arg_match('a', 'a', ['b', 'c'], errmsg='abc')
+    with pytest.raises(ValueError, match='must be one of'):
+        arg_match('a', 'a', ['b', 'c'])
 
-    z = df >> tail()
-    assert z.shape[0] == 6
-    z = df >> tail(3)
-    assert z.shape[0] == 3
-    z = list(range(10)) >> tail()
-    assert len(z) == 6
-    with pytest.raises(NotImplementedError):
-        tail(3)
+    assert arg_match('a', 'a', ['a', 'b', 'c']) == 'a'

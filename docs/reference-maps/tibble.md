@@ -35,17 +35,17 @@ Reference map of `r-tidyverse-tibble` can be found [here][1].
 |---|---|---:|
 |<s>`tibble-package`</s>|||
 |[`tibble()`][12] [`tibble_row()`][18]|Build a data frame| [:material-notebook:][2] |
+|[`fibble()`][13]|Same as `tibble()` but used as Verb arguments| [:material-notebook:][2] |
 |<s>`tbl_df-class`</s>|||
 |<s>`print(<tbl_df>)`</s> <s>`format(<tbl_df>)`</s>|||
 |[`tribble()`][3]|Row-wise tibble creation|[:material-notebook:][2]|
-|[**`zibble()`**][19]|Zip version of tibble, where names specify together and so do values.||
 
 ### Coercion
 
 |API|Description|Notebook example|
 |---|---|---:|
 |<s>`is_tibble()`</s>|||
-|<s>`as_tibble`</s>|||
+|[`as_tibble()`][19]|Convert data frames into datar's tibbles||
 |<s>`new_tibble()`</s> <s>`validate_tibble()`</s>|||
 |[`enframe()`][4] [`deframe()`][14]|Converting iterables to data frames, and vice versa| [:material-notebook:][5]|
 
@@ -80,9 +80,10 @@ Reference map of `r-tidyverse-tibble` can be found [here][1].
 [10]: ../../api/datar.tibble.verbs/#datar.tibble.verbs.has_rownames
 [11]: ../../notebooks/rownames
 [12]: ../../api/datar.tibble.tibble/#datar.tibble.tibble.tibble
+[13]: ../../api/datar.tibble.tibble/#datar.tibble.tibble.fibble
 [14]: ../../api/datar.tibble.verbs/#datar.tibble.verbs.deframe
 [15]: ../../api/datar.tibble.verbs/#datar.tibble.verbs.remove_rownames
 [16]: ../../api/datar.tibble.verbs/#datar.tibble.verbs.rownames_to_column
 [17]: ../../api/datar.tibble.verbs/#datar.tibble.verbs.rowid_to_column
 [18]: ../../api/datar.tibble.tibble/#datar.tibble.tibble.tibble_row
-[19]: ../../api/datar.tibble.tibble/#datar.tibble.tibble.zibble
+[19]: ../../api/datar.tibble.tibble/#datar.tibble.tibble.as_tibble

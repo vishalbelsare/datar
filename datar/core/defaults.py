@@ -1,11 +1,8 @@
-"""Some default values used in datar"""
+from pathlib import Path
+
 from pipda import Symbolic
 
-# When unable to retrieve the expression for column name
-# For example:
-# >>> df >> mutate(f.x+1)
-# In such a case, `f.x+1` cannot be fetched, we use `Var0` instead.
-DEFAULT_COLUMN_PREFIX = "_Var"
-NA_REPR = "<NA>"
-
 f = Symbolic()
+
+OPTION_FILE_HOME = Path("~/.datar.toml").expanduser()
+OPTION_FILE_CWD = Path("./.datar.toml").resolve()

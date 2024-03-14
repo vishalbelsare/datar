@@ -9,9 +9,22 @@ theme:
     palette:
         primary: black
     name: 'material'
-    # font:
-    #   text: 'Ubuntu'
-    #   code: 'Ubuntu Mono'
+    font:
+      text:
+        - FreightSans
+        - "Helvetica Neue"
+        - Helvetica
+        - Arial
+        - sans-serif
+      code:
+        - IBMPlexMono
+        - SFMono-Regular
+        - Menlo
+        - Monaco
+        - Consolas
+        - "Liberation Mono"
+        - "Courier New"
+        - monospace
     features:
         - navigation.top
 markdown_extensions:
@@ -28,7 +41,6 @@ plugins:
     - mkapi
     - mkdocs-jupyter:
         execute: false
-        # execute: true
 extra_css:
     - style.css
 nav:
@@ -36,37 +48,25 @@ nav:
     - 'Reference maps':
         'ALL': 'reference-maps/ALL.md'
         'base': 'reference-maps/base.md'
-        'stats': 'reference-maps/stats.md'
-        'utils': 'reference-maps/utils.md'
         'dplyr': 'reference-maps/dplyr.md'
         'tibble': 'reference-maps/tibble.md'
         'tidyr': 'reference-maps/tidyr.md'
         'forcats': 'reference-maps/forcats.md'
-        'datasets': 'reference-maps/datasets.md'
-        'datar': 'reference-maps/datar.md'
-    - 'Porting rules': 'porting_rules.md'
+        'data': 'reference-maps/datasets.md'
+        'other': 'reference-maps/other.md'
     - 'Import datar': 'import.md'
+    - 'Backends': 'backends.md'
+    - 'Options': 'options.md'
     - 'The f-expression': 'f.md'
-    - 'Performance': 'performance.ipynb'
-    - 'Caveats':
-        'Indexing/Selection': 'caveats/indexing.md'
-        'Tibble vs. DataFrame': 'caveats/tibble_vs_dataframe.md'
-        'Data frame indexes and column names': 'caveats/df_index_colname.md'
-        'Nested data frames': 'caveats/nested_data_frames.md'
-        'List in R vs in python': 'caveats/list.md'
-        'Ptypes': 'caveats/ptypes.md'
-        'Grouped/rowwise data frame': 'caveats/grouped.md'
-        'NAs': 'caveats/NAs.md'
-        'in vs %in%': 'caveats/in.md'
-        '"blind" enviroment': 'caveats/blind.md'
-    - 'Datasets': 'datasets.md'
-    - 'Advanced usage': 'advanced.md'
+    - 'Data': 'data.md'
     - 'Examples':
         'across': 'notebooks/across.ipynb'
         'add_column': 'notebooks/add_column.ipynb'
         'add_row': 'notebooks/add_row.ipynb'
         'arrange': 'notebooks/arrange.ipynb'
         'base': 'notebooks/base.ipynb'
+        'base-arithmetic': 'notebooks/base-arithmetic.ipynb'
+        'base-funs': 'notebooks/base-funs.ipynb'
         'between': 'notebooks/between.ipynb'
         'bind': 'notebooks/bind.ipynb'
         'case_when': 'notebooks/case_when.ipynb'
@@ -92,7 +92,7 @@ nav:
         'forcats_lvl_value': 'notebooks/forcats_lvl_value.ipynb'
         'forcats_misc': 'notebooks/forcats_misc.ipynb'
         'full_seq': 'notebooks/full_seq.ipynb'
-        'datar': 'notebooks/datar.ipynb'
+        'other': 'notebooks/other.ipynb'
         'group_by': 'notebooks/group_by.ipynb'
         'group_map': 'notebooks/group_map.ipynb'
         'group_split': 'notebooks/group_split.ipynb'

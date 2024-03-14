@@ -1,33 +1,37 @@
 """Import all constants, verbs and functions"""
-from . import f
-from .base import _no_warn as _  # don't override from datar.all import _no_warn
-from .base import _builtin_names as _base_builtin_names
+
+from .core import load_plugins as _
+from .core.defaults import f
+
+from .base import _conflict_names as _base_conflict_names
+from .dplyr import _conflict_names as _dplyr_conflict_names
+
 from .base import *
-from .base import _warn as _
-from .datar import *
-from .dplyr import _no_warn as _
-from .dplyr import _builtin_names as _dplyr_builtin_names
 from .dplyr import *
-from .dplyr import _warn as _
-from .stats import *
+from .forcats import *
 from .tibble import *
 from .tidyr import *
-from .utils import *
-from .forcats import *
+from .misc import *
 
-_builtin_names = _base_builtin_names.copy()
-_builtin_names.update(_dplyr_builtin_names)
-# builtin names included
-__all__ = [var_ for var_ in locals() if not var_.startswith("_")]
+__all__ = [key for key in locals() if not key.startswith("_")]
 
-for name in _builtin_names:
-    # let __getattr__ handles the builtins, otherwise
-    # from datar.all import filter
-    # will not warn
-    del locals()[name]
+if get_option("allow_conflict_names"):  # noqa: F405
+    __all__.extend(_base_conflict_names | _dplyr_conflict_names)
+    for name in _base_conflict_names | _dplyr_conflict_names:
+        locals()[name] = locals()[name + "_"]
 
-from .core.warn_builtin_names import (
-    warn_builtin_names as _warn_builtin_names,
-)
 
-__getattr__ = _warn_builtin_names(**_builtin_names)
+def __getattr__(name):
+    """Even when allow_conflict_names is False, datar.base.sum should be fine
+    """
+    if name in _base_conflict_names | _dplyr_conflict_names:
+        import sys
+        import ast
+        from executing import Source
+        node = Source.executing(sys._getframe(1)).node
+        if isinstance(node, (ast.Call, ast.Attribute)):
+            # import datar.all as d
+            # d.sum(...) or getattr(d, "sum")(...)
+            return globals()[name + "_"]
+
+    raise AttributeError

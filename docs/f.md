@@ -11,10 +11,8 @@ You can import it by `from datar import f`, or `from datar.all import *`
 There are different uses for the `f`.
 
 - Use as a proxy to refer to dataframe columns (i.e. `f.x`, `f['x']`)
-- Use as a slice container. For example:
-    - `f[:3]` for `range(0,3)`
-    - `f[f.x:f.z]` for columns from `x` to `z`, inclusively. If you want to exclude the `stop` column: `f[f.x:f.z:0]`
 - Use as the column name marker for `tribble`:
+
     ```python
     tribble(
         f.x, f.y
@@ -22,6 +20,19 @@ There are different uses for the `f`.
         3,   4
     )
     ```
+
+!!! note
+
+    If you want a sequence literal, other than using `base.seq()`, you can
+    also use `base.c[]`.
+
+    For example,
+    ```python
+    from datar.base import c
+    from datar.tibble import tibble
+    df = tibble(x=c[1:5])  # 1, 2, 3, 4
+    ```
+
 
 ## If you don't like `f` ...
 
@@ -40,6 +51,7 @@ Or you can instantiate a new `Symbolic` object:
 from pipda.symbolic import Symbolic
 
 g = Symbolic()
+# assert f is g
 
 # f and g make no difference in execution technically
 ```

@@ -35,10 +35,3 @@ repos:
         args: [tests/]
         pass_filenames: false
         files: ^tests/.+$|^datar/.+$
-    -   id: notebooks
-        name: Executing all notebooks
-        entry: jupyter nbconvert --output-dir /tmp --to notebook --execute
-        language: system
-        pass_filenames: true
-        files: ^docs/.+\.ipynb$
-        exclude: '^docs/.+\.nbconvert\.ipynb$'

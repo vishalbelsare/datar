@@ -1,51 +1,47 @@
-"""Load operator, provide f and __version__"""
-from typing import Mapping
+from typing import Mapping as _Mapping
 
 from .core import operator as _
-from .core import _frame_format_patch
 from .core.defaults import f
+from .core.options import options, get_option, options_context
 
-__all__ = ('f', 'get_versions')
-__version__ = "0.5.5"
+__version__ = "0.15.6"
 
 
-def get_versions(
-    prnt: bool = True
-) -> Mapping[str, str]:  # pragma: no cover
-    """Print or return related versions which help for bug reporting.
+def get_versions(prnt: bool = True) -> _Mapping[str, str]:
+    """Return/Print the versions of the dependencies.
 
     Args:
-        prnt: Print the versions instead of returning them?
+        prnt: If True, print the versions, otherwise return them.
 
     Returns:
-        A `Diot` object of the versions.
+        A dict of the versions of the dependencies if `prnt` is False.
     """
     import sys
-
-    import numpy
-    import pandas
-    import pipda
     import executing
-    import varname
-    from diot import Diot
+    import pipda
+    import simplug
+    from .core.load_plugins import plugin
 
-    out = Diot(
-        python=sys.version,
-        datar=__version__,
-        numpy=numpy.__version__,
-        pandas=pandas.__version__,
-        pipda=pipda.__version__,
-        executing=executing.__version__,
-        varname=varname.__version__,
-    )
+    versions = {
+        "python": sys.version,
+        "datar": __version__,
+        "simplug": simplug.__version__,
+        "executing": executing.__version__,
+        "pipda": pipda.__version__,
+    }
+
+    versions_plg = plugin.hooks.get_versions()
+    versions.update(versions_plg)
+
     if not prnt:
-        return out
+        return versions
 
-    keylen = max(map(len, out))
-    for key, ver in out.items():
+    keylen = max(map(len, versions))
+    for key in versions:
+        ver = versions[key]
         verlines = ver.splitlines()
         print(f"{key.ljust(keylen)}: {verlines.pop(0)}")
-        for verline in verlines:
+        for verline in verlines:  # pragma: no cover
             print(f"{' ' * keylen}  {verline}")
 
     return None

@@ -101,7 +101,7 @@ export/
 site/
 
 # poetry
-poetry.lock
+# poetry.lock
 
 # backup files
 *.bak
@@ -119,3 +119,4 @@ docs/*/*.nbconvert.ipynb
 
 # For quick test
 /_t.py
+/_t.ipynb
